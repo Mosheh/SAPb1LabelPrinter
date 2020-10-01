@@ -75,7 +75,11 @@ namespace LabelPrinting
                 var param = App.GetInstance().GetParam();
                 Nampula.DI.Connection.Instance.ConnectionParameter = param;
                 var conn = Connection.Instance.SqlDialect.GetDbConnection();
-                conn.ConnectionString = param.ToString();
+                if (ConfigHelper.ReplaceSingleQuote)
+                    conn.ConnectionString = param.ToString().Replace('\'', ' ');
+                else
+                    conn.ConnectionString = param.ToString();
+
                 SboConnection.Init(Nampula.UI.ApplicationSAP.GetInstance().CompanySbo, conn);
                 var sboConn = new SboConnection();
                 sboConn.CreateUserTables();
