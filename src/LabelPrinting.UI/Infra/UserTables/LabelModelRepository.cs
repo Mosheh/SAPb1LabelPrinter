@@ -55,7 +55,8 @@ namespace LabelPrinting.UI.Infra.UserTables
 
         public IEnumerable<LabelModel> GetAll()
         {
-            return _connection.Connection.Query<LabelModel>("select * from \"@IV_LP_LabelModel\"");
+            var sql = "SELECT * FROM [@IV_LP_LABELMODEL]".ToSQLAnsi();
+            return _connection.Connection.Query<LabelModel>(sql);
         }
 
         public void Remove(int key)

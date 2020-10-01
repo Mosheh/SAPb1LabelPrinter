@@ -14,7 +14,7 @@ namespace LabelPrinting.UI.Common
         public static bool ExistsTable(this ICompany company, string tableName)
         {
             var tableCount = company.SqlExecuteScalar<int>(
-              $"SELECT 1 FROM [OUTB] WHERE [TableName] = '{tableName}'".ToSQLAnsi());
+              $"SELECT 1 FROM [OUTB] WHERE [TableName] = '{tableName.ToUpper()}'".ToSQLAnsi());
 
             return tableCount > 0;
         }
@@ -22,7 +22,7 @@ namespace LabelPrinting.UI.Common
         public static bool ExistsField(this ICompany company, string tableName, string fieldName)
         {
             var querForCountField =
-             $"Select Count('A') AS Count From CUFD Where (\"TableID\" = '{tableName}' OR \"TableID\" = '@{tableName}') And \"AliasID\" = '{fieldName}'";
+             $"Select Count('A') AS Count From CUFD Where (\"TableID\" = '{tableName.ToUpper()}' OR \"TableID\" = '@{tableName.ToUpper()}') And \"AliasID\" = '{fieldName}'";
 
             var countOfUserField = company.SqlExecuteScalar<int>(querForCountField);
 
