@@ -10,7 +10,7 @@ namespace LabelPrinting.UI.Domain.SAP
     [Table("OITB")]
     public class ItemGroup
     {
-        public int ItmsGrpCode { get; set; }
+        public int ItmsGrpCod { get; set; }
         public string ItmsGrpNam { get; set; }
     }
 }

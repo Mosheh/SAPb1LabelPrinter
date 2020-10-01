@@ -135,7 +135,7 @@ namespace LabelPrinting.UI.UI
                         var chooseItemGroup= new ChooseList.ListChooseForm<Domain.SAP.ItemGroup>();
                         if (chooseItemGroup.ShowDialog(this) == DialogResult.OK)
                         {
-                            filter.Value = chooseItemGroup.SelectedItem.ItmsGrpCode;
+                            filter.Value = chooseItemGroup.SelectedItem.ItmsGrpCod;
                             filter.Description = chooseItemGroup.SelectedItem.ItmsGrpNam;
                         }
                         break;
@@ -146,6 +146,8 @@ namespace LabelPrinting.UI.UI
                     default:
                         break;
                 }
+
+                gridViewFilters.RefreshData();
 
             }
             catch (Exception ex)

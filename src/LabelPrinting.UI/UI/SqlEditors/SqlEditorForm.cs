@@ -65,7 +65,8 @@ namespace LabelPrinting.UI.UI.SqlEditors
             {
                 gridViewResult.Columns.Clear();
                 dataGridResult.DataSource = AppSession.SboConnection.ExecuteSelect(textEditorControl1.Text);
-                gridViewResult.SetLinkedButton((dataGridResult.DataSource as DataTable).Columns);                
+                gridViewResult.SetLinkedButton((dataGridResult.DataSource as DataTable).Columns);
+                gridViewResult.BestFitColumns();
             }
             catch (Exception ex)
             {

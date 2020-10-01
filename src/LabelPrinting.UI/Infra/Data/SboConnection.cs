@@ -145,9 +145,9 @@ namespace LabelPrinting.UI.Infra.Data
             foreach (var filter in validFilters)
             {
                 if (isFirst)
-                    strSql += $" where \"{filter.ColumnName}\"={GetValueField(filter)}";
+                    strSql += $" where \"T\".\"{filter.ColumnName}\"={GetValueField(filter)}";
                 else
-                    strSql += $" and \"{filter.ColumnName}\"={GetValueField(filter)}";
+                    strSql += $" and \"T\".\"{filter.ColumnName}\"={GetValueField(filter)}";
 
                 isFirst = false;
             }
@@ -160,6 +160,8 @@ namespace LabelPrinting.UI.Infra.Data
         {
             switch (filter.Type.Name)
             {
+                case "Int16":
+                    return filter.Value;
                 case "Int32":
                     return filter.Value;
                 case "Int64":

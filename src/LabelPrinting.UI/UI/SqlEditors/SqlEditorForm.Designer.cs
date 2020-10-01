@@ -85,6 +85,7 @@
             // 
             this.gridViewResult.GridControl = this.dataGridResult;
             this.gridViewResult.Name = "gridViewResult";
+            this.gridViewResult.OptionsView.ColumnAutoWidth = false;
             this.gridViewResult.OptionsView.ShowGroupPanel = false;
             this.gridViewResult.OptionsView.ShowIndicator = false;
             // 
