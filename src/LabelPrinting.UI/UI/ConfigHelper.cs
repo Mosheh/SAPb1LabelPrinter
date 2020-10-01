@@ -15,7 +15,10 @@ namespace LabelPrinting.UI.UI
         {
             get { return ConfigurationManager.AppSettings["Standalone"].To<bool>(); }
         }
-
+        public static bool ReplaceSingleQuote
+        {
+            get { return ConfigurationManager.AppSettings["ReplaceSingleQuote"].To<bool>(); }            
+        }
         public static string Server
         {
             get { return ConfigurationManager.AppSettings["Server"]; }

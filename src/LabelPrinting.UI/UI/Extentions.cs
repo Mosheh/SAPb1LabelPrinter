@@ -20,8 +20,10 @@ namespace LabelPrinting.UI.UI
 
         public static bool ExistKey(this Nampula.UI.ComboBox comboBox, object key)
         {
+            if (key == null) return false;
             for (int i = 0; i < comboBox.ValidValues.Count; i++)
-            {
+            {                
+
                 if (comboBox.ValidValues.Item(i).Value.ToString() == key.ToString())
                     return true;
             }
