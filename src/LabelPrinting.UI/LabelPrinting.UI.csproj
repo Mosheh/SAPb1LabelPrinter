@@ -257,11 +257,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Extentions.cs" />
+    <Compile Include="Domain\Filters\ColumnFilters.cs" />
     <Compile Include="Domain\ILabelModelRepository.cs" />
     <Compile Include="Domain\ISboConnection.cs" />
     <Compile Include="Domain\PrintServices\ILabelPreview.cs" />
     <Compile Include="Domain\PrintServices\LabelModel.cs" />
     <Compile Include="Domain\PrintServices\PrintSetting.cs" />
+    <Compile Include="Domain\SAP\BusinessPartner.cs" />
+    <Compile Include="Domain\SAP\ChartOfAccount.cs" />
+    <Compile Include="Domain\SAP\Item.cs" />
+    <Compile Include="Domain\SAP\ItemGroup.cs" />
     <Compile Include="Domain\UserTables\UserTable.cs" />
     <Compile Include="Domain\UserTables\IUserTableRepository.cs" />
     <Compile Include="Domain\UserTables\UserField.cs" />
@@ -273,6 +278,12 @@
     <Compile Include="Infra\UserTables\LabelModelRepository.cs" />
     <Compile Include="Infra\UserTables\UserTableList.cs" />
     <Compile Include="Infra\ZebraPrinterHelpers\ZebraPrinter.cs" />
+    <Compile Include="UI\ChooseList\ListChooseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ChooseList\ListChooseForm.Designer.cs">
+      <DependentUpon>ListChooseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ConfigHelper.cs" />
     <Compile Include="UI\Extentions.cs" />
     <Compile Include="UI\ZplCodeEditorForm.cs">
@@ -307,6 +318,9 @@
     <Compile Include="UI\SqlEditors\SqlEditorForm.Designer.cs">
       <DependentUpon>SqlEditorForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\ChooseList\ListChooseForm.resx">
+      <DependentUpon>ListChooseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ZplCodeEditorForm.resx">
       <DependentUpon>ZplCodeEditorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -362,5 +376,6 @@
   <ItemGroup>
     <None Include="Resources\floppy.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

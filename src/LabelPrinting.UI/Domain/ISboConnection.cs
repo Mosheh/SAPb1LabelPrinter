@@ -1,4 +1,5 @@
-﻿using SAPbouiCOM;
+﻿using LabelPrinting.UI.Domain.Filters;
+using SAPbouiCOM;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,6 +17,8 @@ namespace LabelPrinting.UI.Domain
         IDbConnection Connection { get; }
 
         System.Data.DataTable ExecuteSelect(string selectSql);
+
+        System.Data.DataTable ExecuteSelectFiltering(string selectSql, params ColumnFilter[] columnFilters);
         DataColumnCollection GetColumns(string selectSql);
     }
 }

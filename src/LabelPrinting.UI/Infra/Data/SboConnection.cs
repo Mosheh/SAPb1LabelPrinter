@@ -11,12 +11,15 @@ using System.Text;
 using System.Threading.Tasks;
 using LabelPrinting.UI.Common;
 using System.Runtime.InteropServices;
+using LabelPrinting.UI.Domain.Filters;
+using DevExpress.DataProcessing;
+using DevExpress.XtraReports.UI;
 
 namespace LabelPrinting.UI.Infra.Data
 {
     public class SboConnection : ISboConnection
     {
-      
+
         public static void Init(ICompany company, IDbConnection dbConnection)
         {
             if (company == null)
@@ -107,11 +110,11 @@ namespace LabelPrinting.UI.Infra.Data
 
             var command = AppSession.SboConnection.Connection.CreateCommand();
 
-            command.CommandText =selectSql;
+            command.CommandText = selectSql;
 
             var reader = command.ExecuteReader();
             var data = new DataTable();
-            data.Load(reader);            
+            data.Load(reader);
 
             if (currentState == ConnectionState.Closed)
                 AppSession.SboConnection.Connection.Close();
@@ -122,14 +125,55 @@ namespace LabelPrinting.UI.Infra.Data
         public DataColumnCollection GetColumns(string selectSql)
         {
             var strSql = "";
-            if(Nampula.DI.Connection.Instance.IsHana)
-             strSql = $"select * from ({selectSql}) limit 1";
+            if (Nampula.DI.Connection.Instance.IsHana)
+                strSql = $"select * from ({selectSql}) limit 1";
             else
                 strSql = $"select top 1 * from ({selectSql}) RESSULT";
 
             var data = ExecuteSelect(strSql);
 
             return data.Columns;
+        }
+
+        public DataTable ExecuteSelectFiltering(string selectSql, params ColumnFilter[] columnFilters)
+        {
+
+            var strSql = $"select * from ({selectSql}) T";
+            var validFilters = columnFilters.Where(c => c.Value != null).Where(c => c.Value.ToString() != string.Empty).ToList();
+
+            bool isFirst = true;
+            foreach (var filter in validFilters)
+            {
+                if (isFirst)
+                    strSql += $" where \"{filter.ColumnName}\"={GetValueField(filter)}";
+                else
+                    strSql += $" and \"{filter.ColumnName}\"={GetValueField(filter)}";
+
+                isFirst = false;
+            }
+
+            var data = ExecuteSelect(strSql);
+            return data;
+        }
+
+        private object GetValueField(ColumnFilter filter)
+        {
+            switch (filter.Type.Name)
+            {
+                case "Int32":
+                    return filter.Value;
+                case "Int64":
+                    return filter.Value;
+                case "String":
+                    return $"'{filter.Value}'";
+                case "Decimal":
+                    return $"{filter.Value}";
+                case "Double":
+                    return $"{filter.Value}";
+
+                default:
+                    throw new Exception($"Tipo não mapeado {filter.Type}");                    
+            }
         }
 
         private static ICompany company;

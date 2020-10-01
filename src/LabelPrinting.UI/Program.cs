@@ -133,6 +133,18 @@ namespace LabelPrinting
             }
         }
 
+        public static void ShowInf(string msg)
+        {
+            if (ConfigHelper.IsStandalone)
+            {
+                System.Windows.Forms.MessageBox.Show(msg);
+            }
+            else
+            {
+                app.SetTextOnStatusBar(msg, BoMessageTime.bmt_Short, BoStatusBarMessageType.smt_Warning);
+            }
+        }
+
         public static void ShowSuccessfullMessage()
         {
             if (ConfigHelper.IsStandalone)
