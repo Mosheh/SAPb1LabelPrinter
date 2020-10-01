@@ -75,5 +75,12 @@ namespace LabelPrinting.UI.Infra.UserTables
             if (userTable.Update() != 0)
                 _connection.Company.ThrowExceptionForLastError("Erro ao atualizar dados do modelo");
         }
+
+        public LabelModel GetByKey(int key)
+        {
+            var sql = $"SELECT * FROM [@IV_LP_LABELMODEL] where \"Code\"={key}".ToSQLAnsi();
+            var list = _connection.Connection.Query<LabelModel>(sql);
+            return list.LastOrDefault();
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace LabelPrinting.UI.Domain
         void Add(LabelModel labelModel);
         void Update(LabelModel labelModel);
         void Remove(int key);
-
+        LabelModel GetByKey(int key);
         IEnumerable<LabelModel> GetAll();
     }
 }

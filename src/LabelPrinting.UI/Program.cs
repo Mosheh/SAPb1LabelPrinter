@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraReports.Serialization;
+﻿using DevExpress.XtraPrinting.Preview;
+using DevExpress.XtraReports.Serialization;
 using DevExpress.XtraRichEdit.Model;
 using ICSharpCode.TextEditor.Document;
 using LabelPrinting.UI.Infra;
@@ -97,10 +98,17 @@ namespace LabelPrinting
             var menuAddon = new Nampula.UI.MenuItem(module, BoMenuType.mt_POPUP, "Impressão de etiquetas", UI.Properties.Resources.label);
 
             var menuLabelPrinting = new MenuItem(menuAddon, BoMenuType.mt_STRING, "Impressão");
+            menuLabelPrinting.OnAfterClick += MenuLabelPrinting_OnAfterClick;
 
             var menuConfig = new MenuItem(menuAddon, BoMenuType.mt_POPUP, "Configurações");
             var menuGeneralConfig = new MenuItem(menuConfig, BoMenuType.mt_STRING, "Configurações Gerais");
             menuGeneralConfig.OnAfterClick += MenuGeneralConfig_OnAfterClick;
+        }
+
+        private static void MenuLabelPrinting_OnAfterClick(object sender, MenuEventArgs e)
+        {
+            var form = new PringManagerForm();
+            form.Show();
         }
 
         private static void MenuGeneralConfig_OnAfterClick(object sender, MenuEventArgs e)
