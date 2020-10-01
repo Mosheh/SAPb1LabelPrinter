@@ -1,6 +1,6 @@
 ﻿namespace LabelPrinting
 {
-    partial class LabelPrintingForm
+    partial class ZplCodeEditorForm
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LabelPrintingForm));
-            this.button1 = new Nampula.UI.Button();
-            this.button2 = new Nampula.UI.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ZplCodeEditorForm));
+            this.buttonOK = new Nampula.UI.Button();
+            this.buttonCancel = new Nampula.UI.Button();
             this.spliContainer1 = new Nampula.UI.SpliContainer();
             this.buttonPreview = new Nampula.UI.Button();
             this.comboBox2 = new Nampula.UI.ComboBox();
@@ -40,7 +40,7 @@
             this.staticText2 = new Nampula.UI.StaticText();
             this.comboBox1 = new Nampula.UI.ComboBox();
             this.staticText1 = new Nampula.UI.StaticText();
-            this.editMemo1 = new Nampula.UI.EditMemo();
+            this.editMemoZplCode = new Nampula.UI.EditMemo();
             this.spliContainer2 = new Nampula.UI.SpliContainer();
             this.dataGridFields = new Nampula.UI.DataGrid();
             this.gridViewFields = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -51,7 +51,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.editText2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.editText1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBox1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.editMemo1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.editMemoZplCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spliContainer2)).BeginInit();
             this.spliContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridFields)).BeginInit();
@@ -59,23 +59,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview.Properties)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // buttonOK
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(12, 383);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 21);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
+            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonOK.Location = new System.Drawing.Point(12, 383);
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Size = new System.Drawing.Size(75, 21);
+            this.buttonOK.TabIndex = 0;
+            this.buttonOK.Text = "OK";
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
-            // button2
+            // buttonCancel
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(93, 383);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 21);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonCancel.Location = new System.Drawing.Point(93, 383);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 21);
+            this.buttonCancel.TabIndex = 1;
+            this.buttonCancel.Text = "Cancelar";
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // spliContainer1
             // 
@@ -93,7 +95,7 @@
             this.spliContainer1.Panel1.Controls.Add(this.staticText2);
             this.spliContainer1.Panel1.Controls.Add(this.comboBox1);
             this.spliContainer1.Panel1.Controls.Add(this.staticText1);
-            this.spliContainer1.Panel1.Controls.Add(this.editMemo1);
+            this.spliContainer1.Panel1.Controls.Add(this.editMemoZplCode);
             this.spliContainer1.Panel1.Text = "Panel1";
             this.spliContainer1.Panel2.Controls.Add(this.spliContainer2);
             this.spliContainer1.Panel2.Text = "Panel2";
@@ -252,17 +254,17 @@
             this.staticText1.TabIndex = 1;
             this.staticText1.Text = "Densidade";
             // 
-            // editMemo1
+            // editMemoZplCode
             // 
-            this.editMemo1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.editMemoZplCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.editMemo1.DataSourceInformation = null;
-            this.editMemo1.EditValue = resources.GetString("editMemo1.EditValue");
-            this.editMemo1.Location = new System.Drawing.Point(0, 0);
-            this.editMemo1.Name = "editMemo1";
-            this.editMemo1.Size = new System.Drawing.Size(290, 297);
-            this.editMemo1.TabIndex = 0;
+            this.editMemoZplCode.DataSourceInformation = null;
+            this.editMemoZplCode.EditValue = resources.GetString("editMemoZplCode.EditValue");
+            this.editMemoZplCode.Location = new System.Drawing.Point(0, 0);
+            this.editMemoZplCode.Name = "editMemoZplCode";
+            this.editMemoZplCode.Size = new System.Drawing.Size(290, 297);
+            this.editMemoZplCode.TabIndex = 0;
             // 
             // spliContainer2
             // 
@@ -309,16 +311,16 @@
             this.pictureBoxPreview.Size = new System.Drawing.Size(265, 366);
             this.pictureBoxPreview.TabIndex = 0;
             // 
-            // LabelPrintingForm
+            // ZplCodeEditorForm
             // 
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 415);
             this.Controls.Add(this.spliContainer1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Name = "LabelPrintingForm";
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonOK);
+            this.Name = "ZplCodeEditorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Editor de etiquetas";
             ((System.ComponentModel.ISupportInitialize)(this.spliContainer1)).EndInit();
@@ -327,7 +329,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.editText2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.editText1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBox1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.editMemo1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.editMemoZplCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spliContainer2)).EndInit();
             this.spliContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridFields)).EndInit();
@@ -339,14 +341,14 @@
 
         #endregion
 
-        private Nampula.UI.Button button1;
-        private Nampula.UI.Button button2;
+        private Nampula.UI.Button buttonOK;
+        private Nampula.UI.Button buttonCancel;
         private Nampula.UI.SpliContainer spliContainer1;
         private Nampula.UI.SpliContainer spliContainer2;
         private Nampula.UI.DataGrid dataGridFields;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewFields;
         private Nampula.UI.PictureBox pictureBoxPreview;
-        private Nampula.UI.EditMemo editMemo1;
+        private Nampula.UI.EditMemo editMemoZplCode;
         private Nampula.UI.ComboBox comboBox1;
         private Nampula.UI.StaticText staticText1;
         private Nampula.UI.StaticText staticText4;

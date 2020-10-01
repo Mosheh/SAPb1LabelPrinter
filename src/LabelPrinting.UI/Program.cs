@@ -38,7 +38,7 @@ namespace LabelPrinting
                 {
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
-                    Application.Run(new LabelPrintingForm());
+                    Application.Run(new PringManagerForm());
                 }
                 else
                 {

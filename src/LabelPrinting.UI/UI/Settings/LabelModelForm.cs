@@ -82,11 +82,33 @@ namespace LabelPrinting.UI.UI.Settings
                 if (model == null)
                     throw new Exception("Selecione um modelo");
 
-                var form = new SqlEditorForm();
+                var form = new SqlEditorForm(model.U_Query);
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
 
                     model.U_Query = form.ResultSQL;
+                    _labelModelRepository.Update(model);
+                    Program.ShowSuccessfullMessage();
+                }
+            }
+            catch (Exception ex)
+            {
+                Program.ShowMessageError(ex);
+            }
+        }
+
+        private void buttonSetZplCode_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var model = gridViewModel.GetFocusedRow() as LabelModel;
+                if (model == null)
+                    throw new Exception("Selecione um modelo");
+
+                var form = new ZplCodeEditorForm(model);
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    model.U_ZplCode = form.ZplCodeResult;
                     _labelModelRepository.Update(model);
                     Program.ShowSuccessfullMessage();
                 }

@@ -99,6 +99,39 @@ namespace LabelPrinting.UI.Infra.Data
             }
         }
 
+        public DataTable ExecuteSelect(string selectSql)
+        {
+            var currentState = Connection.State;
+            if (currentState == ConnectionState.Closed)
+                AppSession.SboConnection.Connection.Open();
+
+            var command = AppSession.SboConnection.Connection.CreateCommand();
+
+            command.CommandText =selectSql;
+
+            var reader = command.ExecuteReader();
+            var data = new DataTable();
+            data.Load(reader);            
+
+            if (currentState == ConnectionState.Closed)
+                AppSession.SboConnection.Connection.Close();
+
+            return data;
+        }
+
+        public DataColumnCollection GetColumns(string selectSql)
+        {
+            var strSql = "";
+            if(Nampula.DI.Connection.Instance.IsHana)
+             strSql = $"select * from ({selectSql}) limit 1";
+            else
+                strSql = $"select top 1 * from ({selectSql})";
+
+            var data = ExecuteSelect(strSql);
+
+            return data.Columns;
+        }
+
         private static ICompany company;
 
 

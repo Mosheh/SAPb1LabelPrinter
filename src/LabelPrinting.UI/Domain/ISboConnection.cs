@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SAPbouiCOM;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -13,5 +14,8 @@ namespace LabelPrinting.UI.Domain
 
         void CreateUserTables();
         IDbConnection Connection { get; }
+
+        System.Data.DataTable ExecuteSelect(string selectSql);
+        DataColumnCollection GetColumns(string selectSql);
     }
 }

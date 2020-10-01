@@ -107,6 +107,7 @@
             this.buttonSetZplCode.Size = new System.Drawing.Size(120, 21);
             this.buttonSetZplCode.TabIndex = 5;
             this.buttonSetZplCode.Text = "Definir modelo etiqueta";
+            this.buttonSetZplCode.Click += new System.EventHandler(this.buttonSetZplCode_Click);
             // 
             // buttonNew
             // 

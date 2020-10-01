@@ -49,6 +49,13 @@ namespace LabelPrinting.UI.Infra.UserTables
             fieldQuery.Description = "Consulta";            
             tableLabelModel.Fields.Add(fieldQuery);
 
+            var fieldsResultFieldsName= new Domain.UserTables.UserField();
+            fieldsResultFieldsName.Name = "FieldsName";
+            fieldsResultFieldsName.TableName = "IV_LP_LabelModel";
+            fieldsResultFieldsName.Type = BoFieldTypes.db_Memo;
+            fieldsResultFieldsName.Description = "Campos da consulta";
+            tableLabelModel.Fields.Add(fieldsResultFieldsName);
+
         }
     }
 }

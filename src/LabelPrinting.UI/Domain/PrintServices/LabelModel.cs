@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,5 +21,19 @@ namespace LabelPrinting.UI.Domain.PrintServices
         public string U_ZplCode { get; set; }
         public string U_PrinterName { get; set; }
         public string U_Query { get; set; }
+        public string U_FieldsName{ get; set; }
+
+        public void SetFields(DataColumnCollection dataColumnCollection)
+        {
+            U_FieldsName = string.Empty;
+
+            var stringColumns = new StringBuilder("|");
+            foreach (DataColumn column in dataColumnCollection)
+            {
+                stringColumns.Append($"{column.ColumnName}|");
+            }
+
+            U_FieldsName = stringColumns.ToString();
+        }
     }
 }

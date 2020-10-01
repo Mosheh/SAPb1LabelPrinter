@@ -1,10 +1,13 @@
-﻿using ICSharpCode.TextEditor.Document;
+﻿using DevExpress.XtraReports.Design;
+using ICSharpCode.TextEditor.Document;
 using LabelPrinting.UI.Infra;
 using Nampula.UI.Helpers.Extentions;
+using SimpleQuery;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -17,10 +20,10 @@ namespace LabelPrinting.UI.UI.SqlEditors
 {
     public partial class SqlEditorForm : Form
     {
-        public SqlEditorForm()
+        public SqlEditorForm(string strSql)
         {
             InitializeComponent();
-
+            textEditorControl1.Text = strSql;
             textEditorControl1.Font = new Font("Consolas", 10, FontStyle.Regular);
             textEditorControl1.SetHighlighting("SQL");
             textEditorControl1.TextChanged += (s, a) =>
@@ -58,14 +61,8 @@ namespace LabelPrinting.UI.UI.SqlEditors
         private void toolStripButtonExecute_Click(object sender, EventArgs e)
         {
             try
-            {
-                var command = AppSession.SboConnection.Connection.CreateCommand();
-                command.CommandText = this.textEditorControl1.Text;
-
-                var reader = command.ExecuteReader();
-                var data = new DataTable();
-                data.Load(reader);
-                dataGridResult.DataSource = data;
+            {              
+                dataGridResult.DataSource = AppSession.SboConnection.ExecuteSelect(textEditorControl1.Text);
             }
             catch (Exception ex)
             {
