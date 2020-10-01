@@ -40,7 +40,10 @@ namespace LabelPrinting
 
                 string insertText = "{" + selectedField.ColumnName +"}";
                 int selectionIndex = editMemoZplCode.SelectionStart;
-                this.editMemoZplCode.Text = editMemoZplCode.Text.Insert(selectionIndex, insertText);
+                if (string.IsNullOrEmpty(editMemoZplCode.SelectedText))
+                    this.editMemoZplCode.Text = editMemoZplCode.Text.Insert(selectionIndex, insertText);
+                else
+                    this.editMemoZplCode.Text = editMemoZplCode.Text.Insert(selectionIndex, insertText).Replace(editMemoZplCode.SelectedText, "");
                 editMemoZplCode.SelectionStart = selectionIndex; // restore cursor position
             }
             catch (Exception ex)
