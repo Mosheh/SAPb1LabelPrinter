@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraReports.Design;
 using ICSharpCode.TextEditor.Document;
 using LabelPrinting.UI.Infra;
+using Nampula.UI;
 using Nampula.UI.Helpers.Extentions;
 using SimpleQuery;
 using System;
@@ -64,14 +65,33 @@ namespace LabelPrinting.UI.UI.SqlEditors
             {
                 gridViewResult.Columns.Clear();
                 dataGridResult.DataSource = AppSession.SboConnection.ExecuteSelect(textEditorControl1.Text);
+                FormatColumnsEditableColumns(dataGridResult.DataSource as DataTable);
             }
             catch (Exception ex)
             {
                 Program.ShowMessageError(ex);
             }
         }
-    }
 
+        private void FormatColumnsEditableColumns(DataTable result)
+        {
+            if (result == null) return;
+
+            Dictionary<string, BoLinkedObject> sapColumns = new Dictionary<string, BoLinkedObject>();
+            sapColumns.Add("ItemCode", BoLinkedObject.lf_Items);
+            sapColumns.Add("CardCode", BoLinkedObject.lf_BusinessPartner);
+            sapColumns.Add("ItmsGrpCod", BoLinkedObject.lf_ItemGroups);
+            foreach (DataColumn column in result.Columns)
+            {
+                if (column.ColumnName.Equals("Qtd")) continue;
+                gridViewResult.Columns[column.ColumnName].OptionsColumn.ReadOnly = true;
+
+                if (sapColumns.ContainsKey(column.ColumnName))
+                    gridViewResult.Columns[column.ColumnName].SetLinkedButton(sapColumns[column.ColumnName]);
+            }
+        }
+    }
+   
     public class SyntaxEditor : ISyntaxModeFileProvider
     {
         public List<SyntaxMode> _syntaxModes = null;
