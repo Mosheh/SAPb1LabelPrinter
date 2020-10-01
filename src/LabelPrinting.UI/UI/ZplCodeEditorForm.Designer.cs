@@ -45,6 +45,7 @@
             this.dataGridFields = new Nampula.UI.DataGrid();
             this.gridViewFields = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.pictureBoxPreview = new Nampula.UI.PictureBox();
+            this.gridColumnFieldName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.spliContainer1)).BeginInit();
             this.spliContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comboBox2.Properties)).BeginInit();
@@ -295,6 +296,8 @@
             // 
             // gridViewFields
             // 
+            this.gridViewFields.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumnFieldName});
             this.gridViewFields.GridControl = this.dataGridFields;
             this.gridViewFields.Name = "gridViewFields";
             this.gridViewFields.OptionsView.ShowGroupPanel = false;
@@ -310,6 +313,14 @@
             this.pictureBoxPreview.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
             this.pictureBoxPreview.Size = new System.Drawing.Size(265, 366);
             this.pictureBoxPreview.TabIndex = 0;
+            // 
+            // gridColumnFieldName
+            // 
+            this.gridColumnFieldName.Caption = "Campos";
+            this.gridColumnFieldName.FieldName = "ColumnName";
+            this.gridColumnFieldName.Name = "gridColumnFieldName";
+            this.gridColumnFieldName.Visible = true;
+            this.gridColumnFieldName.VisibleIndex = 0;
             // 
             // ZplCodeEditorForm
             // 
@@ -357,6 +368,7 @@
         private Nampula.UI.StaticText staticText2;
         private Nampula.UI.ComboBox comboBox2;
         private Nampula.UI.Button buttonPreview;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnFieldName;
     }
 }
 

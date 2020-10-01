@@ -40,7 +40,9 @@ namespace LabelPrinting.UI.Infra.UserTables
             if (!string.IsNullOrEmpty(labelModel.U_ZplCode))
                 userTable.UserFields.Fields.Item(nameof(LabelModel.U_ZplCode)).Value = labelModel.U_ZplCode;
             if (!string.IsNullOrEmpty(labelModel.U_Query))
-                userTable.UserFields.Fields.Item(nameof(LabelModel.U_Query)).Value = labelModel.U_Query;            
+                userTable.UserFields.Fields.Item(nameof(LabelModel.U_Query)).Value = labelModel.U_Query;
+            if (!string.IsNullOrEmpty(labelModel.U_FieldsName))
+                userTable.UserFields.Fields.Item(nameof(LabelModel.U_FieldsName)).Value = labelModel.U_FieldsName;
         }
 
         private void Validated(LabelModel labelModel)

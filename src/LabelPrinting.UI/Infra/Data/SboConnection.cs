@@ -125,7 +125,7 @@ namespace LabelPrinting.UI.Infra.Data
             if(Nampula.DI.Connection.Instance.IsHana)
              strSql = $"select * from ({selectSql}) limit 1";
             else
-                strSql = $"select top 1 * from ({selectSql})";
+                strSql = $"select top 1 * from ({selectSql}) RESSULT";
 
             var data = ExecuteSelect(strSql);
 

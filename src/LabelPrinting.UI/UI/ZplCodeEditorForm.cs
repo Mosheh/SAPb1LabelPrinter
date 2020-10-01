@@ -36,6 +36,7 @@ namespace LabelPrinting
 
             var columns = _sboConnection.GetColumns(_labelModel.U_Query);
             _labelModel.SetFields(columns);
+            dataGridFields.DataSource = columns;
         }
 
         private void FillControls()
