@@ -37,6 +37,11 @@ namespace LabelPrinting.UI.Infra.UserTables
             userTable.Name = labelModel.Name;
             userTable.UserFields.Fields.Item(nameof(LabelModel.U_PrinterName)).Value = labelModel.U_PrinterName;
 
+            userTable.UserFields.Fields.Item(nameof(LabelModel.U_LabelAlignTop)).Value = labelModel.U_LabelAlignTop;
+            userTable.UserFields.Fields.Item(nameof(LabelModel.U_LabelAlignLeft)).Value = labelModel.U_LabelAlignLeft;
+            userTable.UserFields.Fields.Item(nameof(LabelModel.U_Width)).Value = labelModel.U_Width;
+            userTable.UserFields.Fields.Item(nameof(LabelModel.U_Length)).Value = labelModel.U_Length;
+
             if (!string.IsNullOrEmpty(labelModel.U_ZplCode))
                 userTable.UserFields.Fields.Item(nameof(LabelModel.U_ZplCode)).Value = labelModel.U_ZplCode;
             if (!string.IsNullOrEmpty(labelModel.U_Query))

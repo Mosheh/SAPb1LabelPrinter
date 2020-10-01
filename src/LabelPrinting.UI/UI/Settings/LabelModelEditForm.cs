@@ -41,6 +41,10 @@ namespace LabelPrinting.UI.UI.Settings
         private void FillControls()
         {
             editTextName.EditValue = _labelModel.Name;
+            editTextAlignTop.EditValue = _labelModel.U_LabelAlignTop;
+            editTextAlignLeft.EditValue = _labelModel.U_LabelAlignLeft;
+            editTextWidth.EditValue = _labelModel.U_Width;
+            editTextLength.EditValue = _labelModel.U_Length;
             if (comboBoxPrinterName.ExistKey(_labelModel.U_PrinterName))
                 comboBoxPrinterName.Select(_labelModel.U_PrinterName, Nampula.UI.BoSearchKey.psk_ByValue);
         }

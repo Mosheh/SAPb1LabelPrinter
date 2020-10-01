@@ -38,9 +38,41 @@ namespace LabelPrinting.UI.Infra.UserTables
             fieldPrinterName.TableName = "IV_LP_LabelModel";
             fieldPrinterName.Name = "PrinterName";
             fieldPrinterName.Type = BoFieldTypes.db_Alpha;
-            fieldName.Description = "Nome da impressora";
+            fieldPrinterName.Description = "Nome da impressora";
             fieldPrinterName.Size = 120;
             tableLabelModel.Fields.Add(fieldPrinterName);
+
+            var fieldLabelAlignLeft = new Domain.UserTables.UserField();
+            fieldLabelAlignLeft.TableName = "IV_LP_LabelModel";
+            fieldLabelAlignLeft.Name = "LabelAlignLeft";
+            fieldLabelAlignLeft.Type = BoFieldTypes.db_Numeric;
+            fieldLabelAlignLeft.SubType = BoFldSubTypes.st_Measurement;
+            fieldLabelAlignLeft.Description = "Alinhamento esquerda etiqueta";
+            tableLabelModel.Fields.Add(fieldLabelAlignLeft); 
+            
+            var fieldLabelAlignTop = new Domain.UserTables.UserField();
+            fieldLabelAlignTop.TableName = "IV_LP_LabelModel";
+            fieldLabelAlignTop.Name = "LabelAlignTop";
+            fieldLabelAlignTop.Type = BoFieldTypes.db_Numeric;
+            fieldLabelAlignTop.SubType = BoFldSubTypes.st_Measurement;
+            fieldLabelAlignTop.Description = "Alinhamento superior etiqueta";
+            tableLabelModel.Fields.Add(fieldLabelAlignTop);
+
+            var fieldWidth = new Domain.UserTables.UserField();
+            fieldWidth.TableName = "IV_LP_LabelModel";
+            fieldWidth.Name = "Width";
+            fieldWidth.Type = BoFieldTypes.db_Numeric;
+            fieldWidth.SubType =  BoFldSubTypes.st_Measurement;
+            fieldWidth.Description = "Largura etiqueta";
+            tableLabelModel.Fields.Add(fieldWidth);
+
+            var fieldLength = new Domain.UserTables.UserField();
+            fieldLength.TableName = "IV_LP_LabelModel";
+            fieldLength.Name = "Length";
+            fieldLength.Type = BoFieldTypes.db_Numeric;
+            fieldLength.SubType = BoFldSubTypes.st_Measurement;
+            fieldLength.Description = "Comprimento da etiqueta";
+            tableLabelModel.Fields.Add(fieldLength);
 
             var fieldQuery= new Domain.UserTables.UserField();
             fieldQuery.TableName = "IV_LP_LabelModel";
@@ -49,6 +81,7 @@ namespace LabelPrinting.UI.Infra.UserTables
             fieldQuery.Description = "Consulta";            
             tableLabelModel.Fields.Add(fieldQuery);
 
+         
             var fieldsResultFieldsName= new Domain.UserTables.UserField();
             fieldsResultFieldsName.Name = "FieldsName";
             fieldsResultFieldsName.TableName = "IV_LP_LabelModel";

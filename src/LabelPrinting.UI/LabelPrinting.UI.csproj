@@ -250,6 +250,7 @@
     <Compile Include="Infra\Services\LabelPreview.cs" />
     <Compile Include="Infra\UserTables\LabelModelRepository.cs" />
     <Compile Include="Infra\UserTables\UserTableList.cs" />
+    <Compile Include="Infra\ZebraPrinterHelpers\ZebraPrinter.cs" />
     <Compile Include="UI\ConfigHelper.cs" />
     <Compile Include="UI\Extentions.cs" />
     <Compile Include="UI\ZplCodeEditorForm.cs">

@@ -20,6 +20,10 @@ namespace LabelPrinting.UI.Domain.PrintServices
         public string Name { get; set; }
         public string U_ZplCode { get; set; }
         public string U_PrinterName { get; set; }
+        public int U_LabelAlignTop { get; set; } = 0;
+        public int U_LabelAlignLeft { get; set; } = 0;
+        public int U_Width { get; set; } = 812;
+        public int U_Length { get; set; } = 309;
         public string U_Query { get; set; }
         public string U_FieldsName{ get; set; }
 
