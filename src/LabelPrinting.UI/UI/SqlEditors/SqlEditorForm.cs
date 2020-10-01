@@ -61,7 +61,8 @@ namespace LabelPrinting.UI.UI.SqlEditors
         private void toolStripButtonExecute_Click(object sender, EventArgs e)
         {
             try
-            {              
+            {
+                gridViewResult.Columns.Clear();
                 dataGridResult.DataSource = AppSession.SboConnection.ExecuteSelect(textEditorControl1.Text);
             }
             catch (Exception ex)

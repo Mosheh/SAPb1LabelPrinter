@@ -3,5 +3,6 @@ obj/
 packages/
 .vs/
 .vscode/
+installers/
 *.suo
 *.bak

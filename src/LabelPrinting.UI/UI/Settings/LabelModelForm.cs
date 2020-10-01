@@ -118,5 +118,15 @@ namespace LabelPrinting.UI.UI.Settings
                 Program.ShowMessageError(ex);
             }
         }
+
+        private void LabelModelForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

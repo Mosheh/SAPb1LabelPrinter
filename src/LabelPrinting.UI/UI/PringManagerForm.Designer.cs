@@ -83,7 +83,7 @@
             // buttonList
             // 
             this.buttonList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonList.Location = new System.Drawing.Point(689, 3);
+            this.buttonList.Location = new System.Drawing.Point(689, 6);
             this.buttonList.Name = "buttonList";
             this.buttonList.Size = new System.Drawing.Size(99, 23);
             this.buttonList.TabIndex = 6;
@@ -97,10 +97,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridResult.DontSavePosition = false;
             this.dataGridResult.Font = new System.Drawing.Font("Tahoma", 7.25F);
-            this.dataGridResult.Location = new System.Drawing.Point(15, 76);
+            this.dataGridResult.Location = new System.Drawing.Point(15, 51);
             this.dataGridResult.MainView = this.gridViewResult;
             this.dataGridResult.Name = "dataGridResult";
-            this.dataGridResult.Size = new System.Drawing.Size(773, 333);
+            this.dataGridResult.Size = new System.Drawing.Size(773, 358);
             this.dataGridResult.TabIndex = 7;
             this.dataGridResult.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewResult});
@@ -121,6 +121,7 @@
             this.buttonClose.Size = new System.Drawing.Size(99, 23);
             this.buttonClose.TabIndex = 8;
             this.buttonClose.Text = "Fechar";
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // buttonPrint
             // 
@@ -134,8 +135,7 @@
             // 
             // buttonApplyQty
             // 
-            this.buttonApplyQty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonApplyQty.Location = new System.Drawing.Point(249, 29);
+            this.buttonApplyQty.Location = new System.Drawing.Point(249, 28);
             this.buttonApplyQty.Name = "buttonApplyQty";
             this.buttonApplyQty.Size = new System.Drawing.Size(99, 17);
             this.buttonApplyQty.TabIndex = 10;
@@ -147,7 +147,7 @@
             this.editTextQtd.DataSourceInformation = null;
             this.editTextQtd.DataType = Nampula.UI.BoDataType.dt_QUANTITY;
             this.editTextQtd.DecimalPlaces = 0;
-            this.editTextQtd.Location = new System.Drawing.Point(143, 29);
+            this.editTextQtd.Location = new System.Drawing.Point(143, 28);
             this.editTextQtd.Name = "editTextQtd";
             this.editTextQtd.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 7.25F);
             this.editTextQtd.Properties.Appearance.Options.UseFont = true;
@@ -181,11 +181,10 @@
             // 
             // staticText1
             // 
-            this.staticText1.AutoSize = true;
-            this.staticText1.LinkedTo = null;
-            this.staticText1.Location = new System.Drawing.Point(12, 34);
+            this.staticText1.LinkedTo = this.editTextQtd;
+            this.staticText1.Location = new System.Drawing.Point(12, 28);
             this.staticText1.Name = "staticText1";
-            this.staticText1.Size = new System.Drawing.Size(122, 13);
+            this.staticText1.Size = new System.Drawing.Size(131, 17);
             this.staticText1.TabIndex = 12;
             this.staticText1.Text = "Alterar quantidade para";
             // 
@@ -211,7 +210,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewResult)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.editTextQtd.Properties)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

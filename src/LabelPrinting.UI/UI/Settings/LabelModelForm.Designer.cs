@@ -63,6 +63,7 @@
             this.gridColumnPrinterName});
             this.gridViewModel.GridControl = this.dataGridModel;
             this.gridViewModel.Name = "gridViewModel";
+            this.gridViewModel.OptionsBehavior.ReadOnly = true;
             this.gridViewModel.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumnName
@@ -88,6 +89,7 @@
             this.buttonOK.Size = new System.Drawing.Size(75, 21);
             this.buttonOK.TabIndex = 1;
             this.buttonOK.Text = "OK";
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonSqlEditor
             // 
@@ -141,6 +143,7 @@
             this.Controls.Add(this.dataGridModel);
             this.Name = "LabelModelForm";
             this.Text = "Modelos";
+            this.Load += new System.EventHandler(this.LabelModelForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridModel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewModel)).EndInit();
             this.ResumeLayout(false);

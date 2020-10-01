@@ -3,6 +3,8 @@ using LabelPrinting.UI.Infra;
 using LabelPrinting.UI.Infra.UserTables;
 using LabelPrinting.UI.Infra.ZebraPrinterHelpers;
 using Nampula.Framework;
+using Nampula.UI;
+using Nampula.UI.Helpers.Extentions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +28,7 @@ namespace LabelPrinting.UI.UI
 
             _labelModelRepository = new LabelModelRepository(AppSession.SboConnection);
             _zebraPrinterHelper = new ZebraPrinterHelper();
+            gridViewResult.CreateMenuExport();
 
             FillLabelModels();
         }
@@ -55,13 +58,30 @@ namespace LabelPrinting.UI.UI
                 {
                     row["Qtd"] = 1;
                 }
-                
+                gridViewResult.Columns.Clear();
                 dataGridResult.DataSource = result;
+                FormatColumnsEditableColumns(result);
                 gridViewResult.BestFitColumns();
             }
             catch (Exception ex)
             {
                 Program.ShowMessageError(ex);
+            }
+        }
+
+        private void FormatColumnsEditableColumns(DataTable result)
+        {
+            Dictionary<string, BoLinkedObject> sapColumns = new Dictionary<string, BoLinkedObject>();
+            sapColumns.Add("ItemCode", BoLinkedObject.lf_Items);
+            sapColumns.Add("CardCode", BoLinkedObject.lf_BusinessPartner);
+            sapColumns.Add("ItmsGrpCod", BoLinkedObject.lf_ItemGroups);            
+            foreach (DataColumn column in result.Columns)
+            {
+                if (column.ColumnName.Equals("Qtd")) continue;
+                gridViewResult.Columns[column.ColumnName].OptionsColumn.ReadOnly = true;
+
+                if (sapColumns.ContainsKey(column.ColumnName))
+                    gridViewResult.Columns[column.ColumnName].SetLinkedButton(sapColumns[column.ColumnName]);
             }
         }
 
@@ -123,7 +143,8 @@ namespace LabelPrinting.UI.UI
                 var data = dataGridResult.DataSource as DataTable;
 
                 if (data == null)
-                    return;
+                    return;                
+
                 foreach (DataRow item in data.Rows)
                 {
                     item["Qtd"] = qtd;
@@ -135,6 +156,11 @@ namespace LabelPrinting.UI.UI
             {
                 Program.ShowMessageError(ex);
             }
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

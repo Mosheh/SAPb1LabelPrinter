@@ -23,10 +23,30 @@ namespace LabelPrinting
             InitializeComponent();
             _labelModel = labelModel;
             _sboConnection = AppSession.SboConnection;
-            
+            gridViewFields.OptionsBehavior.ReadOnly = true;
+            gridViewFields.DoubleClick += GridViewFields_DoubleClick;
+            gridViewFields.OptionsView.ShowIndicator = true;
             FillFields();
 
             FillControls();
+        }
+
+        private void GridViewFields_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                var selectedField = gridViewFields.GetFocusedRow() as DataColumn;
+                if (selectedField == null) return;
+
+                string insertText = "{" + selectedField.ColumnName +"}";
+                int selectionIndex = editMemoZplCode.SelectionStart;
+                this.editMemoZplCode.Text = editMemoZplCode.Text.Insert(selectionIndex, insertText);
+                editMemoZplCode.SelectionStart = selectionIndex; // restore cursor position
+            }
+            catch (Exception ex)
+            {
+                Program.ShowMessageError(ex);
+            }
         }
 
         private void FillFields()
