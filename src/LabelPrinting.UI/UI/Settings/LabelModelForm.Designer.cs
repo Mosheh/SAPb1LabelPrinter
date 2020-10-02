@@ -64,6 +64,7 @@
             this.gridColumnPrinterName});
             this.gridViewModel.GridControl = this.dataGridModel;
             this.gridViewModel.Name = "gridViewModel";
+            this.gridViewModel.OptionsBehavior.Editable = false;
             this.gridViewModel.OptionsBehavior.ReadOnly = true;
             this.gridViewModel.OptionsView.ShowGroupPanel = false;
             // 

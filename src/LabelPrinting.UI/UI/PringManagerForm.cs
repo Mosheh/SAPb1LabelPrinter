@@ -234,7 +234,7 @@ namespace LabelPrinting.UI.UI
 
                     for (int i = 0; i < qtd; i++)
                     {
-                        var labelReplacedValues = GetFormattedLabel(model.U_ZplCode, row);
+                        var labelReplacedValues = GetFormattedLabel(model.U_ZplCode, row, model);
                         _zebraPrinterHelper.PrintLabel(labelReplacedValues, model.U_PrinterName, model);
                     }
                 }
@@ -247,14 +247,14 @@ namespace LabelPrinting.UI.UI
             }
         }
 
-        private string GetFormattedLabel(string u_ZplCode, DataRow row)
+        private string GetFormattedLabel(string u_ZplCode, DataRow row, LabelModel model)
         {
             foreach (DataColumn column in row.Table.Columns)
             {
                 if (column.ColumnName.Equals("Qtd")) continue;
                 var value = row[column].ToString();
                 if(column.DataType.Name.Equals("Decimal"))
-                    value = row[column].ToDecimal().ToString("n2");
+                    value = row[column].ToDecimal().ToString($"n{model.U_DecimalPlaces}");
                 var columnField = "{" + column.ColumnName + "}";
                 u_ZplCode = u_ZplCode.Replace(columnField, value);
             }
