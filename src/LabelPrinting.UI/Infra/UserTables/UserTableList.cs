@@ -89,6 +89,13 @@ namespace LabelPrinting.UI.Infra.UserTables
             fieldsResultFieldsName.Description = "Campos da consulta";
             tableLabelModel.Fields.Add(fieldsResultFieldsName);
 
+            var fieldsDecimalPlaces= new Domain.UserTables.UserField();
+            fieldsDecimalPlaces.Name = "DecimalPlaces";
+            fieldsDecimalPlaces.TableName = "IV_LP_LabelModel";
+            fieldsDecimalPlaces.Type = BoFieldTypes.db_Numeric;
+            fieldsDecimalPlaces.Description = "N casas decimais para tipo valor";
+            tableLabelModel.Fields.Add(fieldsDecimalPlaces);
+
         }
     }
 }

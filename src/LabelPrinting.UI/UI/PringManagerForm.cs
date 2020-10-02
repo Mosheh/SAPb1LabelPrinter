@@ -170,6 +170,14 @@ namespace LabelPrinting.UI.UI
             {
                 comboBoxPrinterName.ValidValues.Add(item.Code, item.Name);
             }
+
+            if (models.Count() == 1)
+            {
+                var first = models.First();
+                comboBoxPrinterName.Select(first.Code, BoSearchKey.psk_ByValue);
+                ComboBoxPrinterName_SelectedValueChanged(comboBoxPrinterName, null);
+            }
+
         }
 
         private void buttonList_Click(object sender, EventArgs e)
@@ -245,6 +253,8 @@ namespace LabelPrinting.UI.UI
             {
                 if (column.ColumnName.Equals("Qtd")) continue;
                 var value = row[column].ToString();
+                if(column.DataType.Name.Equals("Decimal"))
+                    value = row[column].ToDecimal().ToString("n2");
                 var columnField = "{" + column.ColumnName + "}";
                 u_ZplCode = u_ZplCode.Replace(columnField, value);
             }
@@ -264,11 +274,13 @@ namespace LabelPrinting.UI.UI
                 if (data == null)
                     return;
 
-                foreach (DataRow item in data.Rows)
+                foreach (var rowIndex in gridViewResult.GetSelectedRows())
                 {
-                    item["Qtd"] = qtd;
-                }
+                    var row = gridViewResult.GetDataRow(rowIndex);
 
+                    row["Qtd"] = qtd;
+                }
+              
                 gridViewResult.RefreshData();
             }
             catch (Exception ex)

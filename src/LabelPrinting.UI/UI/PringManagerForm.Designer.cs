@@ -62,8 +62,6 @@
             // 
             // comboBoxPrinterName
             // 
-            this.comboBoxPrinterName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxPrinterName.DataSourceInformation = null;
             this.comboBoxPrinterName.Location = new System.Drawing.Point(143, 4);
             this.comboBoxPrinterName.Name = "comboBoxPrinterName";

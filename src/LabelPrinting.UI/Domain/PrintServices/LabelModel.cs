@@ -26,7 +26,7 @@ namespace LabelPrinting.UI.Domain.PrintServices
         public int U_Length { get; set; } = 309;
         public string U_Query { get; set; }
         public string U_FieldsName{ get; set; }
-
+        public int U_DecimalPlaces { get; set; } = 2;
         public void SetFields(DataColumnCollection dataColumnCollection)
         {
             U_FieldsName = string.Empty;

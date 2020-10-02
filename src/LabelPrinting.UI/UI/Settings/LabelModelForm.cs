@@ -13,13 +13,14 @@ using LabelPrinting.UI.Infra.UserTables;
 using LabelPrinting.UI.Infra;
 using LabelPrinting.UI.Domain.PrintServices;
 using LabelPrinting.UI.UI.SqlEditors;
+using Nampula.Framework;
 
 namespace LabelPrinting.UI.UI.Settings
 {
     public partial class LabelModelForm : Form
     {
         private LabelModelRepository _labelModelRepository;
-        
+
 
         public LabelModelForm()
         {
@@ -32,7 +33,7 @@ namespace LabelPrinting.UI.UI.Settings
 
         private void FillGrid()
         {
-            dataGridModel.DataSource = _labelModelRepository.GetAll(); 
+            dataGridModel.DataSource = _labelModelRepository.GetAll();
         }
 
         private void buttonNew_Click(object sender, EventArgs e)
@@ -127,6 +128,26 @@ namespace LabelPrinting.UI.UI.Settings
         private void buttonOK_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var model = gridViewModel.GetFocusedRow() as LabelModel;
+                if (model == null)
+                    throw new Exception("Selecione um modelo");
+
+
+                _labelModelRepository.Remove(model.Code.To<int>());
+                Program.ShowSuccessfullMessage();
+                FillGrid();
+
+            }
+            catch (Exception ex)
+            {
+                Program.ShowMessageError(ex);
+            }
         }
     }
 }

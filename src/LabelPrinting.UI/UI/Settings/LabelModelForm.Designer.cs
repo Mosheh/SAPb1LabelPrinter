@@ -37,6 +37,7 @@
             this.buttonSetZplCode = new Nampula.UI.Button();
             this.buttonNew = new Nampula.UI.Button();
             this.buttonEdit = new Nampula.UI.Button();
+            this.buttonRemove = new Nampula.UI.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridModel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewModel)).BeginInit();
             this.SuspendLayout();
@@ -84,6 +85,7 @@
             // 
             // buttonOK
             // 
+            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonOK.Location = new System.Drawing.Point(12, 383);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 21);
@@ -97,7 +99,7 @@
             this.buttonSqlEditor.Location = new System.Drawing.Point(542, 383);
             this.buttonSqlEditor.Name = "buttonSqlEditor";
             this.buttonSqlEditor.Size = new System.Drawing.Size(120, 21);
-            this.buttonSqlEditor.TabIndex = 4;
+            this.buttonSqlEditor.TabIndex = 5;
             this.buttonSqlEditor.Text = "Definir consulta SQL";
             this.buttonSqlEditor.Click += new System.EventHandler(this.buttonSqlEditor_Click);
             // 
@@ -107,13 +109,14 @@
             this.buttonSetZplCode.Location = new System.Drawing.Point(668, 383);
             this.buttonSetZplCode.Name = "buttonSetZplCode";
             this.buttonSetZplCode.Size = new System.Drawing.Size(120, 21);
-            this.buttonSetZplCode.TabIndex = 5;
+            this.buttonSetZplCode.TabIndex = 6;
             this.buttonSetZplCode.Text = "Definir modelo etiqueta";
             this.buttonSetZplCode.Click += new System.EventHandler(this.buttonSetZplCode_Click);
             // 
             // buttonNew
             // 
-            this.buttonNew.Location = new System.Drawing.Point(380, 383);
+            this.buttonNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonNew.Location = new System.Drawing.Point(274, 383);
             this.buttonNew.Name = "buttonNew";
             this.buttonNew.Size = new System.Drawing.Size(75, 21);
             this.buttonNew.TabIndex = 2;
@@ -122,12 +125,23 @@
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(461, 383);
+            this.buttonEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEdit.Location = new System.Drawing.Point(355, 383);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(75, 21);
             this.buttonEdit.TabIndex = 3;
             this.buttonEdit.Text = "Editar";
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
+            // 
+            // buttonRemove
+            // 
+            this.buttonRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRemove.Location = new System.Drawing.Point(436, 383);
+            this.buttonRemove.Name = "buttonRemove";
+            this.buttonRemove.Size = new System.Drawing.Size(75, 21);
+            this.buttonRemove.TabIndex = 4;
+            this.buttonRemove.Text = "Remover";
+            this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
             // 
             // LabelModelForm
             // 
@@ -135,6 +149,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 415);
+            this.Controls.Add(this.buttonRemove);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonNew);
             this.Controls.Add(this.buttonSetZplCode);
@@ -161,5 +176,6 @@
         private Nampula.UI.Button buttonSetZplCode;
         private Nampula.UI.Button buttonNew;
         private Nampula.UI.Button buttonEdit;
+        private Nampula.UI.Button buttonRemove;
     }
 }

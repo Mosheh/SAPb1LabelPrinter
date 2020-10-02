@@ -48,6 +48,8 @@ namespace LabelPrinting.UI.Infra.UserTables
                 userTable.UserFields.Fields.Item(nameof(LabelModel.U_Query)).Value = labelModel.U_Query;
             if (!string.IsNullOrEmpty(labelModel.U_FieldsName))
                 userTable.UserFields.Fields.Item(nameof(LabelModel.U_FieldsName)).Value = labelModel.U_FieldsName;
+
+            userTable.UserFields.Fields.Item(nameof(LabelModel.U_DecimalPlaces)).Value = labelModel.U_DecimalPlaces;
         }
 
         private void Validated(LabelModel labelModel)
@@ -68,7 +70,13 @@ namespace LabelPrinting.UI.Infra.UserTables
 
         public void Remove(int key)
         {
-            throw new NotImplementedException();
+            var userTable = _connection.Company.UserTables.Item(nameof(LabelModel).Prefix());
+            if (!userTable.GetByKey(key.ToString()))
+                throw new Exception("Modelo não encontrado");
+
+            if (userTable.Remove() != 0)
+                _connection.Company.ThrowExceptionForLastError("Erro ao remover modelo");
+
         }
 
         public void Update(LabelModel labelModel)
