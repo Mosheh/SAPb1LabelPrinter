@@ -24,6 +24,7 @@ namespace LabelPrinting.UI.Domain.PrintServices
         public int U_LabelAlignLeft { get; set; } = 0;
         public int U_Width { get; set; } = 812;
         public int U_Length { get; set; } = 309;
+        public int U_NColumns { get; set; } = 1;
         public string U_Query { get; set; }
         public string U_FieldsName{ get; set; }
         public int U_DecimalPlaces { get; set; } = 2;

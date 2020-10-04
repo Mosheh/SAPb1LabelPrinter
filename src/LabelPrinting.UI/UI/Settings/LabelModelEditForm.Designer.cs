@@ -44,6 +44,8 @@
             this.staticText6 = new Nampula.UI.StaticText();
             this.editTextDecimalPlaces = new Nampula.UI.EditText();
             this.staticText7 = new Nampula.UI.StaticText();
+            this.editTextNColumns = new Nampula.UI.EditText();
+            this.staticText8 = new Nampula.UI.StaticText();
             ((System.ComponentModel.ISupportInitialize)(this.editTextName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxPrinterName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.editTextAlignTop.Properties)).BeginInit();
@@ -51,6 +53,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.editTextWidth.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.editTextLength.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.editTextDecimalPlaces.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.editTextNColumns.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // staticText1
@@ -133,7 +136,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(87, 158);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 5;
+            this.buttonCancel.TabIndex = 17;
             this.buttonCancel.Text = "Cancelar";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -143,7 +146,7 @@
             this.buttonOK.Location = new System.Drawing.Point(6, 158);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 4;
+            this.buttonOK.TabIndex = 16;
             this.buttonOK.Text = "OK";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
@@ -174,7 +177,7 @@
             this.editTextAlignTop.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.editTextAlignTop.Properties.MaxLength = 100;
             this.editTextAlignTop.Size = new System.Drawing.Size(261, 17);
-            this.editTextAlignTop.TabIndex = 7;
+            this.editTextAlignTop.TabIndex = 5;
             // 
             // staticText3
             // 
@@ -182,7 +185,7 @@
             this.staticText3.Location = new System.Drawing.Point(3, 45);
             this.staticText3.Name = "staticText3";
             this.staticText3.Size = new System.Drawing.Size(157, 17);
-            this.staticText3.TabIndex = 6;
+            this.staticText3.TabIndex = 4;
             this.staticText3.Text = "Alinhamento superior";
             // 
             // editTextAlignLeft
@@ -212,7 +215,7 @@
             this.editTextAlignLeft.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.editTextAlignLeft.Properties.MaxLength = 100;
             this.editTextAlignLeft.Size = new System.Drawing.Size(261, 17);
-            this.editTextAlignLeft.TabIndex = 9;
+            this.editTextAlignLeft.TabIndex = 7;
             // 
             // staticText4
             // 
@@ -220,7 +223,7 @@
             this.staticText4.Location = new System.Drawing.Point(3, 62);
             this.staticText4.Name = "staticText4";
             this.staticText4.Size = new System.Drawing.Size(157, 17);
-            this.staticText4.TabIndex = 8;
+            this.staticText4.TabIndex = 6;
             this.staticText4.Text = "Alinhamento esquerdo";
             // 
             // editTextWidth
@@ -250,7 +253,7 @@
             this.editTextWidth.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.editTextWidth.Properties.MaxLength = 100;
             this.editTextWidth.Size = new System.Drawing.Size(261, 17);
-            this.editTextWidth.TabIndex = 13;
+            this.editTextWidth.TabIndex = 11;
             // 
             // staticText5
             // 
@@ -258,7 +261,7 @@
             this.staticText5.Location = new System.Drawing.Point(3, 96);
             this.staticText5.Name = "staticText5";
             this.staticText5.Size = new System.Drawing.Size(157, 17);
-            this.staticText5.TabIndex = 12;
+            this.staticText5.TabIndex = 10;
             this.staticText5.Text = "Largura";
             // 
             // editTextLength
@@ -288,7 +291,7 @@
             this.editTextLength.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.editTextLength.Properties.MaxLength = 100;
             this.editTextLength.Size = new System.Drawing.Size(261, 17);
-            this.editTextLength.TabIndex = 11;
+            this.editTextLength.TabIndex = 9;
             // 
             // staticText6
             // 
@@ -296,7 +299,7 @@
             this.staticText6.Location = new System.Drawing.Point(3, 79);
             this.staticText6.Name = "staticText6";
             this.staticText6.Size = new System.Drawing.Size(157, 17);
-            this.staticText6.TabIndex = 10;
+            this.staticText6.TabIndex = 8;
             this.staticText6.Text = "Altura";
             // 
             // editTextDecimalPlaces
@@ -304,26 +307,36 @@
             this.editTextDecimalPlaces.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.editTextDecimalPlaces.DataSourceInformation = null;
-            this.editTextDecimalPlaces.Location = new System.Drawing.Point(160, 119);
+            this.editTextDecimalPlaces.DataType = Nampula.UI.BoDataType.dt_QUANTITY;
+            this.editTextDecimalPlaces.DecimalPlaces = 0;
+            this.editTextDecimalPlaces.Location = new System.Drawing.Point(160, 135);
             this.editTextDecimalPlaces.Name = "editTextDecimalPlaces";
             this.editTextDecimalPlaces.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 7.25F);
             this.editTextDecimalPlaces.Properties.Appearance.Options.UseFont = true;
             this.editTextDecimalPlaces.Properties.Appearance.Options.UseTextOptions = true;
-            this.editTextDecimalPlaces.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.editTextDecimalPlaces.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.editTextDecimalPlaces.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(229)))), ((int)(((byte)(242)))));
             this.editTextDecimalPlaces.Properties.AppearanceDisabled.Options.UseBackColor = true;
             this.editTextDecimalPlaces.Properties.AppearanceDisabled.Options.UseForeColor = true;
+            this.editTextDecimalPlaces.Properties.AppearanceDisabled.Options.UseTextOptions = true;
+            this.editTextDecimalPlaces.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.editTextDecimalPlaces.Properties.AppearanceFocused.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(243)))), ((int)(((byte)(156)))));
             this.editTextDecimalPlaces.Properties.AppearanceFocused.Options.UseBackColor = true;
             this.editTextDecimalPlaces.Properties.AppearanceFocused.Options.UseForeColor = true;
+            this.editTextDecimalPlaces.Properties.AppearanceFocused.Options.UseTextOptions = true;
+            this.editTextDecimalPlaces.Properties.AppearanceFocused.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.editTextDecimalPlaces.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(229)))), ((int)(((byte)(242)))));
             this.editTextDecimalPlaces.Properties.AppearanceReadOnly.Options.UseBackColor = true;
             this.editTextDecimalPlaces.Properties.AppearanceReadOnly.Options.UseForeColor = true;
+            this.editTextDecimalPlaces.Properties.AppearanceReadOnly.Options.UseTextOptions = true;
+            this.editTextDecimalPlaces.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.editTextDecimalPlaces.Properties.AutoHeight = false;
-            this.editTextDecimalPlaces.Properties.DisplayFormat.FormatString = "f0";
+            this.editTextDecimalPlaces.Properties.DisplayFormat.FormatString = "n0";
             this.editTextDecimalPlaces.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.editTextDecimalPlaces.Properties.EditFormat.FormatString = "f0";
+            this.editTextDecimalPlaces.Properties.EditFormat.FormatString = "n0";
             this.editTextDecimalPlaces.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.editTextDecimalPlaces.Properties.Mask.EditMask = "n0";
+            this.editTextDecimalPlaces.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.editTextDecimalPlaces.Properties.MaxLength = 100;
             this.editTextDecimalPlaces.Size = new System.Drawing.Size(81, 17);
             this.editTextDecimalPlaces.TabIndex = 15;
@@ -332,11 +345,60 @@
             // staticText7
             // 
             this.staticText7.LinkedTo = this.editTextDecimalPlaces;
-            this.staticText7.Location = new System.Drawing.Point(3, 119);
+            this.staticText7.Location = new System.Drawing.Point(3, 135);
             this.staticText7.Name = "staticText7";
             this.staticText7.Size = new System.Drawing.Size(157, 17);
             this.staticText7.TabIndex = 14;
             this.staticText7.Text = "Casas decimais para tipo valor";
+            // 
+            // editTextNColumns
+            // 
+            this.editTextNColumns.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.editTextNColumns.DataSourceInformation = null;
+            this.editTextNColumns.DataType = Nampula.UI.BoDataType.dt_QUANTITY;
+            this.editTextNColumns.DecimalPlaces = 0;
+            this.editTextNColumns.Location = new System.Drawing.Point(160, 113);
+            this.editTextNColumns.Name = "editTextNColumns";
+            this.editTextNColumns.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 7.25F);
+            this.editTextNColumns.Properties.Appearance.Options.UseFont = true;
+            this.editTextNColumns.Properties.Appearance.Options.UseTextOptions = true;
+            this.editTextNColumns.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.editTextNColumns.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(229)))), ((int)(((byte)(242)))));
+            this.editTextNColumns.Properties.AppearanceDisabled.Options.UseBackColor = true;
+            this.editTextNColumns.Properties.AppearanceDisabled.Options.UseForeColor = true;
+            this.editTextNColumns.Properties.AppearanceDisabled.Options.UseTextOptions = true;
+            this.editTextNColumns.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.editTextNColumns.Properties.AppearanceFocused.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(243)))), ((int)(((byte)(156)))));
+            this.editTextNColumns.Properties.AppearanceFocused.Options.UseBackColor = true;
+            this.editTextNColumns.Properties.AppearanceFocused.Options.UseForeColor = true;
+            this.editTextNColumns.Properties.AppearanceFocused.Options.UseTextOptions = true;
+            this.editTextNColumns.Properties.AppearanceFocused.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.editTextNColumns.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(229)))), ((int)(((byte)(242)))));
+            this.editTextNColumns.Properties.AppearanceReadOnly.Options.UseBackColor = true;
+            this.editTextNColumns.Properties.AppearanceReadOnly.Options.UseForeColor = true;
+            this.editTextNColumns.Properties.AppearanceReadOnly.Options.UseTextOptions = true;
+            this.editTextNColumns.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.editTextNColumns.Properties.AutoHeight = false;
+            this.editTextNColumns.Properties.DisplayFormat.FormatString = "n0";
+            this.editTextNColumns.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.editTextNColumns.Properties.EditFormat.FormatString = "n0";
+            this.editTextNColumns.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.editTextNColumns.Properties.Mask.EditMask = "n0";
+            this.editTextNColumns.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.editTextNColumns.Properties.MaxLength = 100;
+            this.editTextNColumns.Size = new System.Drawing.Size(81, 17);
+            this.editTextNColumns.TabIndex = 13;
+            this.editTextNColumns.ToolTip = "Formatar números do tipo valor (preço) com apenas duas casas";
+            // 
+            // staticText8
+            // 
+            this.staticText8.LinkedTo = this.editTextNColumns;
+            this.staticText8.Location = new System.Drawing.Point(3, 113);
+            this.staticText8.Name = "staticText8";
+            this.staticText8.Size = new System.Drawing.Size(157, 17);
+            this.staticText8.TabIndex = 12;
+            this.staticText8.Text = "N Colunas no cilindro";
             // 
             // LabelModelEditForm
             // 
@@ -344,6 +406,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(433, 193);
+            this.Controls.Add(this.editTextNColumns);
+            this.Controls.Add(this.staticText8);
             this.Controls.Add(this.editTextDecimalPlaces);
             this.Controls.Add(this.staticText7);
             this.Controls.Add(this.editTextWidth);
@@ -369,6 +433,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.editTextWidth.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.editTextLength.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.editTextDecimalPlaces.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.editTextNColumns.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -391,5 +456,7 @@
         private Nampula.UI.StaticText staticText6;
         private Nampula.UI.EditText editTextDecimalPlaces;
         private Nampula.UI.StaticText staticText7;
+        private Nampula.UI.EditText editTextNColumns;
+        private Nampula.UI.StaticText staticText8;
     }
 }

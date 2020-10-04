@@ -74,6 +74,14 @@ namespace LabelPrinting.UI.Infra.UserTables
             fieldLength.Description = "Comprimento da etiqueta";
             tableLabelModel.Fields.Add(fieldLength);
 
+            var fieldNColumn= new Domain.UserTables.UserField();
+            fieldNColumn.TableName = "IV_LP_LabelModel";
+            fieldNColumn.Name = "NColumns";
+            fieldNColumn.Type = BoFieldTypes.db_Numeric;
+            fieldNColumn.SubType = BoFldSubTypes.st_Measurement;
+            fieldNColumn.Description = "Número de colunas";
+            tableLabelModel.Fields.Add(fieldNColumn);
+
             var fieldQuery= new Domain.UserTables.UserField();
             fieldQuery.TableName = "IV_LP_LabelModel";
             fieldQuery.Name = "Query";

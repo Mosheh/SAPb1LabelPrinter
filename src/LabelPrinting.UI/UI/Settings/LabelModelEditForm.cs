@@ -46,6 +46,7 @@ namespace LabelPrinting.UI.UI.Settings
             editTextWidth.EditValue = _labelModel.U_Width;
             editTextLength.EditValue = _labelModel.U_Length;
             editTextDecimalPlaces.EditValue = _labelModel.U_DecimalPlaces;
+            editTextNColumns.EditValue = _labelModel.U_NColumns;
             if (comboBoxPrinterName.ExistKey(_labelModel.U_PrinterName))
                 comboBoxPrinterName.Select(_labelModel.U_PrinterName, Nampula.UI.BoSearchKey.psk_ByValue);
         }
@@ -57,6 +58,7 @@ namespace LabelPrinting.UI.UI.Settings
                 _labelModel.Name = editTextName.Text;
                 _labelModel.U_PrinterName = comboBoxPrinterName.Selected != null ? comboBoxPrinterName.Selected.Value.ToString() : "";
                 _labelModel.U_DecimalPlaces = editTextDecimalPlaces.EditValue.To<int>();
+                _labelModel.U_NColumns = editTextNColumns.EditValue.To<int>();
                 _labelModel.U_LabelAlignTop = editTextAlignTop.EditValue.To<int>();
                 _labelModel.U_LabelAlignLeft = editTextAlignLeft.EditValue.To<int>();
                 _labelModel.U_Width= editTextWidth.EditValue.To<int>();

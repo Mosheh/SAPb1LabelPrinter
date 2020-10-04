@@ -50,6 +50,7 @@ namespace LabelPrinting.UI.Infra.UserTables
                 userTable.UserFields.Fields.Item(nameof(LabelModel.U_FieldsName)).Value = labelModel.U_FieldsName;
 
             userTable.UserFields.Fields.Item(nameof(LabelModel.U_DecimalPlaces)).Value = labelModel.U_DecimalPlaces;
+            userTable.UserFields.Fields.Item(nameof(LabelModel.U_NColumns)).Value = labelModel.U_NColumns;
         }
 
         private void Validated(LabelModel labelModel)
@@ -60,6 +61,12 @@ namespace LabelPrinting.UI.Infra.UserTables
                 throw new Exception("Nome inválido");
             if (string.IsNullOrEmpty(labelModel.U_PrinterName))
                 throw new Exception("Impressora não informada");
+
+            if(labelModel.U_NColumns<=0)
+                throw new Exception("N colunas inválido");
+            if (labelModel.U_DecimalPlaces < 0)
+                throw new Exception("N de cassas decimais inválido");
+            
         }
 
         public IEnumerable<LabelModel> GetAll()
