@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -235,11 +236,12 @@ namespace LabelPrinting.UI.UI
 
                 var selectedCount = gridViewResult.SelectedRowsCount;
 
-                var labelGroup = new Dictionary<int, List<DataRow>>();
+                Dictionary<KeyValuePair<int, int>, List<DataRow>> a = new Dictionary<KeyValuePair<int, int>, List<DataRow>>();
+                var labelGroup = new Dictionary<Dictionary<int, int>, List<DataRow>>();
 
-                var lines = selectedCount / model.U_NColumns;
                 var skipLines = new List<int>();
 
+                var zplResult = new List<String>();
                 foreach (var rowIndex in gridViewResult.GetSelectedRows())
                 {
                     if (skipLines.Contains(rowIndex)) continue;
@@ -251,13 +253,16 @@ namespace LabelPrinting.UI.UI
                     var nColumns = model.U_NColumns;
 
                     var rows = new List<DataRow>();
-                    labelGroup.Add(rowIndex, rows);
+                    var qtdLabel = new Dictionary<int, int>() { { rowIndex, 0 } };
+                    labelGroup.Add(qtdLabel, rows);
                     while (totalGroup < nColumns)
                     {
                         var newIndex = rowIndex + totalGroup;
                         if (gridViewResult.IsRowSelected(newIndex))
                         {
-                            rows.Add(gridViewResult.GetDataRow(newIndex));
+                            var dataRow = gridViewResult.GetDataRow(newIndex);
+                            qtdLabel[rowIndex] = dataRow["Qtd"].ToInt32();
+                            rows.Add(dataRow);
                             skipLines.Add(newIndex);
 
                         }
@@ -273,32 +278,40 @@ namespace LabelPrinting.UI.UI
 
                 foreach (var label in labelGroup)
                 {
-                    var zplCode = model.U_ZplCode;
-                    foreach (var columnName in model.U_FieldsName.Split('|'))
+                    var labelQtd = label.Key.Values.First();
+
+                    for (int i = 0; i < labelQtd; i++)
                     {
-                        if (string.IsNullOrEmpty(columnName)) continue;
-                        var rx = new Regex("{" + columnName + "}", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-                        var fieldsOcurrences = model.U_NColumns;
-
-                        foreach (DataRow row in label.Value)
+                        var zplCode = model.U_ZplCode;
+                        foreach (var columnName in model.U_FieldsName.Split('|'))
                         {
-                            Match match = rx.Match(zplCode);
+                            if (string.IsNullOrEmpty(columnName)) continue;
+                            var rx = new Regex("{" + columnName + "}", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-                            while (match.Success)
+                            var fieldsOcurrences = model.U_NColumns;
+
+                            foreach (DataRow row in label.Value)
                             {
-                                zplCode = zplCode.Remove(match.Index, match.Value.Length);
-                                zplCode = zplCode.Insert(match.Index, GetFormattedValue( row[columnName], model));
-                                break;
-                            }
-                        }
+                                Match match = rx.Match(zplCode);
 
+                                while (match.Success)
+                                {
+                                    zplCode = zplCode.Remove(match.Index, match.Value.Length);
+                                    zplCode = zplCode.Insert(match.Index, GetFormattedValue(row[columnName], model));
+                                    break;
+                                }
+                            }
+
+                        }
+                        _zebraPrinterHelper.PrintLabel(zplCode, model.U_PrinterName, model);
+                        zplResult.Add(zplCode);
                     }
-                    _zebraPrinterHelper.PrintLabel(zplCode, model.U_PrinterName, model);
-            
+
                 }
                 Program.ShowSuccessfullMessage();
 
+
+                WriteTempCode(zplResult);
             }
             catch (Exception ex)
             {
@@ -306,9 +319,26 @@ namespace LabelPrinting.UI.UI
             }
         }
 
+        private void WriteTempCode(List<string> zplResult)
+        {
+            try
+            {
+                foreach (var item in zplResult)
+                {
+                    var temp = Path.GetTempFileName();
+                    File.WriteAllText(temp, item);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
         private string GetFormattedValue(object v, LabelModel model)
         {
-            if(v.GetType().Name.Equals("Decimal"))
+            if (v.GetType().Name.Equals("Decimal"))
                 return v.ToDecimal().ToString($"n{model.U_DecimalPlaces}");
             else
                 return v.ToString();
@@ -338,8 +368,9 @@ namespace LabelPrinting.UI.UI
                 if (model == null)
                     throw new Exception("Modelo  não selecionado");
 
-                if(model.U_NColumns >1)
-                    throw new Exception("Para modelos de impressão com  mais de uma coluna não é permitido selecionar repetições, informe apenas quantidade múltipla da quantidade de colunas");
+                var isMultiptle = gridViewResult.SelectedRowsCount % model.U_NColumns == 0;
+                if (!isMultiptle)
+                    throw new Exception($"Selecione um número de linhas que seja múltiplo de {model.U_NColumns} (colunas)");
 
                 var qtd = editTextQtd.EditValue.To<int>();
                 if (qtd <= 0)
@@ -351,7 +382,7 @@ namespace LabelPrinting.UI.UI
                 if (data == null)
                     return;
 
-                
+
 
                 foreach (var rowIndex in gridViewResult.GetSelectedRows())
                 {
