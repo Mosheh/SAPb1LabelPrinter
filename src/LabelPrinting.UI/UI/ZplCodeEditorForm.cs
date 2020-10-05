@@ -65,7 +65,7 @@ namespace LabelPrinting
         private void FillControls()
         {
             if (!string.IsNullOrEmpty(_labelModel.U_ZplCode))
-                editMemoZplCode.EditValue = _labelModel.U_ZplCode;
+                editMemoZplCode.Text = _labelModel.U_ZplCode;
 
 
         }

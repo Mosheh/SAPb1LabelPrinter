@@ -16,6 +16,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -46,7 +47,7 @@ namespace LabelPrinting.UI.UI
         {
             var repository = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             gridViewFilters.Columns[nameof(ColumnFilter.Description)].ColumnEdit = repository;
-            
+
             repository.ButtonClick += ListLinkedButtonByContext;
         }
 
@@ -68,7 +69,7 @@ namespace LabelPrinting.UI.UI
             var selectedModel = GetSelectedModel();
             if (selectedModel == null) return;
 
-            var columns = AppSession.SboConnection.GetColumns(selectedModel.U_Query);            
+            var columns = AppSession.SboConnection.GetColumns(selectedModel.U_Query);
 
             var list = new List<ColumnFilter>();
             foreach (DataColumn col in columns)
@@ -85,10 +86,10 @@ namespace LabelPrinting.UI.UI
                 list.Add(new ColumnFilter
                 {
                     ColumnName = col.ColumnName,
-                     ColumnDescription = columnDescription,
-                     BoLinkedObject = boLinkedObject,
-                      Type = col.DataType                       
-                }) ;
+                    ColumnDescription = columnDescription,
+                    BoLinkedObject = boLinkedObject,
+                    Type = col.DataType
+                });
             }
 
             dataGridFilters.DataSource = list;
@@ -104,9 +105,9 @@ namespace LabelPrinting.UI.UI
 
                 switch (filter.BoLinkedObject)
                 {
-                    
+
                     case BoLinkedObject.lf_GLAccounts:
-                        var chooseAccount= new ChooseList.ListChooseForm<Domain.SAP.ChartOfAccount>();
+                        var chooseAccount = new ChooseList.ListChooseForm<Domain.SAP.ChartOfAccount>();
                         if (chooseAccount.ShowDialog(this) == DialogResult.OK)
                         {
                             filter.Value = chooseAccount.SelectedItem.AcctCode;
@@ -114,13 +115,13 @@ namespace LabelPrinting.UI.UI
                         }
                         break;
                     case BoLinkedObject.lf_BusinessPartner:
-                        var chooseBP= new ChooseList.ListChooseForm<Domain.SAP.BusinessPartner>();
+                        var chooseBP = new ChooseList.ListChooseForm<Domain.SAP.BusinessPartner>();
                         if (chooseBP.ShowDialog(this) == DialogResult.OK)
                         {
                             filter.Value = chooseBP.SelectedItem.CardCode;
                             filter.Description = chooseBP.SelectedItem.CardName;
                         }
-                        break;                    
+                        break;
                     case BoLinkedObject.lf_Items:
                         var chooseItem = new ChooseList.ListChooseForm<Domain.SAP.Item>();
                         if (chooseItem.ShowDialog(this) == DialogResult.OK)
@@ -130,16 +131,16 @@ namespace LabelPrinting.UI.UI
                         }
 
                         break;
-                    
+
                     case BoLinkedObject.lf_ItemGroups:
-                        var chooseItemGroup= new ChooseList.ListChooseForm<Domain.SAP.ItemGroup>();
+                        var chooseItemGroup = new ChooseList.ListChooseForm<Domain.SAP.ItemGroup>();
                         if (chooseItemGroup.ShowDialog(this) == DialogResult.OK)
                         {
                             filter.Value = chooseItemGroup.SelectedItem.ItmsGrpCod;
                             filter.Description = chooseItemGroup.SelectedItem.ItmsGrpNam;
                         }
                         break;
-                    
+
                     case BoLinkedObject.lf_None:
                         Program.ShowInf("Não há tabela vinculada, Digite o valor diretamente no campo a após descrição do campo");
                         break;
@@ -220,23 +221,81 @@ namespace LabelPrinting.UI.UI
                     throw new Exception("Selecione um modelo");
 
                 var model = _labelModelRepository.GetByKey(comboBoxPrinterName.Selected.Value.To<int>());
-
+                if (model.U_NColumns <= 0)
+                    throw new Exception("Não definido número de colunas para o modelo");
                 var data = dataGridResult.DataSource as DataTable;
                 if (data == null)
                     throw new Exception("Não há dados");
                 if (gridViewResult.SelectedRowsCount == 0)
                     throw new Exception("Não há dados selecionados");
 
+                var isMultiptle = gridViewResult.SelectedRowsCount % model.U_NColumns == 0;
+                if (!isMultiptle)
+                    throw new Exception($"Selecione um número de linhas que seja múltiplo de {model.U_NColumns} (colunas)");
+
+                var selectedCount = gridViewResult.SelectedRowsCount;
+
+                var labelGroup = new Dictionary<int, List<DataRow>>();
+
+                var lines = selectedCount / model.U_NColumns;
+                var skipLines = new List<int>();
+
                 foreach (var rowIndex in gridViewResult.GetSelectedRows())
                 {
-                    var row = gridViewResult.GetDataRow(rowIndex);
-                    var qtd = row["Qtd"].To<int>();
+                    if (skipLines.Contains(rowIndex)) continue;
 
-                    for (int i = 0; i < qtd; i++)
+                    var totalGroup = 0;
+
+                    if (!gridViewResult.IsRowSelected(rowIndex)) continue;
+
+                    var nColumns = model.U_NColumns;
+
+                    var rows = new List<DataRow>();
+                    labelGroup.Add(rowIndex, rows);
+                    while (totalGroup < nColumns)
                     {
-                        var labelReplacedValues = GetFormattedLabel(model.U_ZplCode, row, model);
-                        _zebraPrinterHelper.PrintLabel(labelReplacedValues, model.U_PrinterName, model);
+                        var newIndex = rowIndex + totalGroup;
+                        if (gridViewResult.IsRowSelected(newIndex))
+                        {
+                            rows.Add(gridViewResult.GetDataRow(newIndex));
+                            skipLines.Add(newIndex);
+
+                        }
+                        else
+                        {
+                            nColumns++;
+                        }
+
+                        totalGroup++;
                     }
+                }
+
+
+                foreach (var label in labelGroup)
+                {
+                    var zplCode = model.U_ZplCode;
+                    foreach (var columnName in model.U_FieldsName.Split('|'))
+                    {
+                        if (string.IsNullOrEmpty(columnName)) continue;
+                        var rx = new Regex("{" + columnName + "}", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+                        var fieldsOcurrences = model.U_NColumns;
+
+                        foreach (DataRow row in label.Value)
+                        {
+                            Match match = rx.Match(zplCode);
+
+                            while (match.Success)
+                            {
+                                zplCode = zplCode.Remove(match.Index, match.Value.Length);
+                                zplCode = zplCode.Insert(match.Index, GetFormattedValue( row[columnName], model));
+                                break;
+                            }
+                        }
+
+                    }
+                    _zebraPrinterHelper.PrintLabel(zplCode, model.U_PrinterName, model);
+            
                 }
 
 
@@ -247,13 +306,21 @@ namespace LabelPrinting.UI.UI
             }
         }
 
+        private string GetFormattedValue(object v, LabelModel model)
+        {
+            if(v.GetType().Name.Equals("Decimal"))
+                return v.ToDecimal().ToString($"n{model.U_DecimalPlaces}");
+            else
+                return v.ToString();
+        }
+
         private string GetFormattedLabel(string u_ZplCode, DataRow row, LabelModel model)
         {
             foreach (DataColumn column in row.Table.Columns)
             {
                 if (column.ColumnName.Equals("Qtd")) continue;
                 var value = row[column].ToString();
-                if(column.DataType.Name.Equals("Decimal"))
+                if (column.DataType.Name.Equals("Decimal"))
                     value = row[column].ToDecimal().ToString($"n{model.U_DecimalPlaces}");
                 var columnField = "{" + column.ColumnName + "}";
                 u_ZplCode = u_ZplCode.Replace(columnField, value);
@@ -261,18 +328,30 @@ namespace LabelPrinting.UI.UI
             return u_ZplCode;
         }
 
+
+
         private void buttonApplyQty_Click(object sender, EventArgs e)
         {
             try
             {
+                var model = GetSelectedModel();
+                if (model == null)
+                    throw new Exception("Modelo  não selecionado");
+
+                if(model.U_NColumns >1)
+                    throw new Exception("Para modelos de impressão com  mais de uma coluna não é permitido selecionar repetições, informe apenas quantidade múltipla da quantidade de colunas");
+
                 var qtd = editTextQtd.EditValue.To<int>();
                 if (qtd <= 0)
                     throw new Exception("Quantidade inválida");
+
 
                 var data = dataGridResult.DataSource as DataTable;
 
                 if (data == null)
                     return;
+
+                
 
                 foreach (var rowIndex in gridViewResult.GetSelectedRows())
                 {
@@ -280,7 +359,7 @@ namespace LabelPrinting.UI.UI
 
                     row["Qtd"] = qtd;
                 }
-              
+
                 gridViewResult.RefreshData();
             }
             catch (Exception ex)
