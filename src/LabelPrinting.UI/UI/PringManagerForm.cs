@@ -297,7 +297,7 @@ namespace LabelPrinting.UI.UI
                     _zebraPrinterHelper.PrintLabel(zplCode, model.U_PrinterName, model);
             
                 }
-
+                Program.ShowSuccessfullMessage();
 
             }
             catch (Exception ex)

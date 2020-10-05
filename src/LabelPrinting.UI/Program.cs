@@ -153,7 +153,7 @@ namespace LabelPrinting
             }
             else
             {
-                app.MessageBox("Operação realizada com sucesso!");
+                app.SetTextOnStatusBar("Operação realizada com sucesso!", BoMessageTime.bmt_Short, BoStatusBarMessageType.smt_Success);
             }
         }
     }
